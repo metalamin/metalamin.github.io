@@ -2,3 +2,14 @@ theme: jekyll-theme-slate
 remote_theme: "mmistakes/minimal-mistakes"
 plugins:
   - jekyll-remote-theme
+
+# Site Settings
+locale                   : "en"
+title                    : "Metalamin personal site"
+title_separator          : "-"
+name                     : "Metalamin"
+description              : "An amazing website."
+url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : # the subpath of your site, e.g. "/blog"
+repository               : metalamin/metalamin.github.io
+teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
