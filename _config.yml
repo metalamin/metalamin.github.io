@@ -2,6 +2,11 @@ theme: jekyll-theme-slate
 remote_theme: "mmistakes/minimal-mistakes"
 plugins:
   - jekyll-remote-theme
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
 
 # Site Settings
 locale                   : "en"
