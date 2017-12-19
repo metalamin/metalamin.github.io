@@ -9,12 +9,26 @@ plugins:
   - jemoji
 
 # Site Settings
-locale                   : "en"
-title                    : "Metalamin personal site"
+locale                   : "es"
+title                    : "Metalamin Site"
 title_separator          : "-"
 name                     : "Metalamin"
-description              : "An amazing website."
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+description              : "Ze amazing website."
+url                      : "https://metalamin.github.io/"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : metalamin/metalamin.github.io
+repository               : "metalamin/metalamin.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+search                   : true
+
+
+twitter:
+  username: "mmistakes-theme"
+  
+  
+author:
+  name   : "Your Name"
+  avatar : "/assets/images/bio-photo.jpg"
+  bio    : "My awesome biography constrained to a sentence or two goes here."
+  email  : # optional
+  uri    : "http://your-site.com"
+  home   :
