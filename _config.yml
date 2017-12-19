@@ -1,5 +1,5 @@
 remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "aqua"
+minimal_mistakes_skin    : "air"
 plugins:
   - jekyll-remote-theme
   - jekyll-paginate
