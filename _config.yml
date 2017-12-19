@@ -1,4 +1,4 @@
-theme: jekyll-theme-slate
+atheme: jekyll-theme-slate
 remote_theme: "mmistakes/minimal-mistakes"
 plugins:
   - jekyll-remote-theme
@@ -14,7 +14,7 @@ title                    : "Metalamin Site"
 title_separator          : "-"
 name                     : "Metalamin"
 description              : "Ze amazing website."
-url                      : "https://metalamin.github.io/"
+url                      : "https://metalamin.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "metalamin/metalamin.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -22,7 +22,7 @@ search                   : true
 
 
 twitter:
-  username: "mmistakes-theme"
+  username: "metalamin"
   
   
 author:
@@ -30,5 +30,5 @@ author:
   avatar : "/assets/images/bio-photo.jpg"
   bio    : "My awesome biography constrained to a sentence or two goes here."
   email  : # optional
-  uri    : "http://your-site.com"
+  uri    : "https://metalamin.github.io"
   home   :
