@@ -1,5 +1,6 @@
 atheme: jekyll-theme-slate
 remote_theme: "mmistakes/minimal-mistakes"
+minimal_mistakes_skin    : dark
 plugins:
   - jekyll-remote-theme
   - jekyll-paginate
@@ -45,3 +46,4 @@ defaults:
       comments: true
       share: true
       related: true
+minimal_mistakes_skin    :
