@@ -1,4 +1,3 @@
-atheme: jekyll-theme-slate
 remote_theme: "mmistakes/minimal-mistakes"
 minimal_mistakes_skin    : "dark"
 plugins:
@@ -13,19 +12,19 @@ plugins:
 locale                   : "es"
 title                    : "Metalamin Site"
 title_separator          : "-"
-name                     : "Metalamin"
-description              : "Ze amazing website."
+name                     : &name "Metalamin"
+description              : &description "Ze amazing website."
 url                      : "https://metalamin.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "metalamin/metalamin.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 search                   : true
 
-
+# Social Sharing
 twitter:
-  username: "metalamin"
+  username: &twitter "metalamin"
   
-  
+# Site Author  
 author:
   name   : "Your Name"
   avatar : "/assets/images/bio-photo.jpg"
@@ -33,6 +32,8 @@ author:
   email  : # optional
   uri    : "https://metalamin.github.io"
   home   :
+  github : "metalamin"
+  twitter: *twitter
 
 defaults:
   # _posts
@@ -49,3 +50,18 @@ defaults:
       
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
+
+
+# Outputting
+permalink: /:categories/:title/
+# paginate: 5 # amount of posts to show
+# paginate_path: /page:num/
+timezone: America/New_York # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
+# HTML Compression
+# - http://jch.penibelst.de/
+compress_html:
+  clippings: all
+  ignore:
+    envs: development
