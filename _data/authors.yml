@@ -1,0 +1,16 @@
+# /_data/authors.yml
+
+Amine Taouirsa:
+  name: "Amine Taouirsa"
+  uri: "http://thewhip.com"
+  email: "billy@rick.com"
+  bio: "Lazy and efficient as a NOP"
+  avatar: "/assets/images/bio-amine-taouirsa.jpg"
+  twitter: "metalamin"
+
+Borja Martinez:
+  name: "Borja Martinez"
+  #email: "cornelius@thewhip.com"
+  bio: "(In)Security Maniac."
+  avatar: "/assets/images/bio-borja-martinez.jpg"
+  twitter: "Qm9yamFN"

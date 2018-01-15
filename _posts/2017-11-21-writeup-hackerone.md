@@ -4,11 +4,12 @@ header:
   teaser: "https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg"
 categories: 
   - ES
-  - CTF
 tags:
   - ES
   - CTF
   - HackerOne
+author:
+  - Borja Martinez
 ---
 
 Vamos a estrenar el blog con una divertida entrada (que esperemos sean muchas) con la resolución de una de las cosas que más nos gustan en el departamento: los retos de seguridad o CTF.
