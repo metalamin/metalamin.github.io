@@ -25,20 +25,20 @@ Para empezar, accedemos a la dirección que proporcionan en el enunciado
 ([http://104.236.20.43](http://104.236.20.43/)) y nos encontramos con la
 página por defecto de un Apache2.
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_3f4c94537b6d7294.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_3f4c94537b6d7294.png)
 
 Después de unas breves pruebas nos encontramos con el directorio /flag
 donde sale un simple mensaje (You really thought it would be that easy?
 Keep digging!).
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_55541141253cb6d8.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_55541141253cb6d8.png)
 
 Volviendo al enunciado
 (https://www.hackerone.com/blog/hack-your-way-to-nyc-this-december-for-h1-212)
 nos damos cuenta que se se hace referencia a un panel de administración
 para la organizacion de “acme.org”:
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_9a79b1de57dc777a.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_9a79b1de57dc777a.png)
 
 
 Con lo cual intuimos que el servidor puede presentar varios virtual
