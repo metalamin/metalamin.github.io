@@ -3,27 +3,21 @@ title:  "Write-Up Hackerone"
 header:
   teaser: "https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg"
 categories: 
+  - ES
   - CTF
 tags:
+  - ES
   - CTF
   - HackerOne
 ---
 
-Vamos a estrenar el blog con una divertida entrada (que esperemos sean
-muchas) con la resolución de una de las cosas que más nos gustan en el
-departamento: los retos de seguridad o CTF.
+Vamos a estrenar el blog con una divertida entrada (que esperemos sean muchas) con la resolución de una de las cosas que más nos gustan en el departamento: los retos de seguridad o CTF.
 
-Hace poco se ha realizado el CTF de HackerOne H1-212 que se puede
-encontrar en
-<https://www.hackerone.com/blog/hack-your-way-to-nyc-this-december-for-h1-212>.
-Y hoy os traemos este Write-Up de la mano de uno de nuestros compañeros
-Borja Martínez, donde nos explica cómo resolvió la prueba de H1,
-relacionada con una vulnerabilidad de SSRF.
+Hace poco se ha realizado el CTF de HackerOne H1-212 que se puede encontrar en <https://www.hackerone.com/blog/hack-your-way-to-nyc-this-december-for-h1-212>.
+Y hoy os traemos este Write-Up de la mano de uno de nuestros compañeros Borja Martínez, donde nos explica cómo resolvió la prueba de H1, relacionada con una vulnerabilidad de SSRF.
 
 
-Para empezar, accedemos a la dirección que proporcionan en el enunciado
-([http://104.236.20.43](http://104.236.20.43/)) y nos encontramos con la
-página por defecto de un Apache2.
+Para empezar, accedemos a la dirección que proporcionan en el enunciado ([http://104.236.20.43](http://104.236.20.43/)) y nos encontramos con la página por defecto de un Apache2.
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_3f4c94537b6d7294.png)
 
