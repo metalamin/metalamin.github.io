@@ -8,8 +8,7 @@ tags:
   - ES
   - CTF
   - HackerOne
-author:
-  - Borja Martinez
+author: Borja Martinez
 ---
 
 Vamos a estrenar el blog con una divertida entrada (que esperemos sean muchas) con la resolución de una de las cosas que más nos gustan en el departamento: los retos de seguridad o CTF.
