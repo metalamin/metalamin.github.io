@@ -9,8 +9,6 @@ tags:
   - HackerOne
 ---
 
-Buenas a todos,
-
 Vamos a estrenar el blog con una divertida entrada (que esperemos sean
 muchas) con la resolución de una de las cosas que más nos gustan en el
 departamento: los retos de seguridad o CTF.
@@ -152,11 +150,13 @@ la flag.
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_f55afe6afc3795da.png)
 
+```
 {"data":"RkxBRzogQ0YsMmRzVlwvXWZSQVlRLlRERXBgdyJNKCVtVTtwOSs5RkR7WjQ4WCpKdHR7JXZTKCRnN1xTKTpmJT1QW1lAbmthPTx0cWhuRjxhcT1LNTpCQ0BTYip7WyV6IitAeVBiL25mRm5hPGUkaHZ7cDhyMlt2TU1GNTJ5OnovRGg7ezYK"}
-
+```
 
 FLAG:
+```
 CF,2dsV\\/\]fRAYQ.TDEp\`w"M(%mU;p9+9FD{Z48X\*Jtt\{\%vS(\$g7\\S):f%=P\[Y@nka=&lt;tqhnF&lt;aq=K5:BC@Sb\*{\[%z"+@yPb/nfFna&lt;e\$hv{p8r2\[vMMF52y:z/Dh;{6
-
+```
 
 Gracias por el reto!
