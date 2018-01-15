@@ -9,11 +9,11 @@ plugins:
   - jemoji
 
 # Site Settings
-locale                   : "es"
-title                    : "Metalamin Site"
+locale                   : "en"
+title                    : "Innotec Labs"
 title_separator          : "-"
-name                     : &name "Metalamin"
-description              : &description "Ze amazing website."
+name                     : &name "Innotec Labs"
+description              : &description "Innotec System - Labs and Research"
 url                      : "https://metalamin.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "metalamin/metalamin.github.io"
@@ -22,18 +22,18 @@ search                   : true
 
 # Social Sharing
 twitter:
-  username: &twitter "metalamin"
+  username: &twitter "InnotecLabs"
   
 # Site Author  
 author:
-  name   : "Your Name"
-  avatar : "/assets/images/bio-photo.jpg"
+  name   : "Innotec System Labs"
+  avatar : "/assets/images/Innotec.jpg"
   bio    : "My awesome biography constrained to a sentence or two goes here."
   location: "Madrid, Spain"
   email  : # optional
-  uri    : "https://metalamin.github.io"
+  uri    : "http://labs.innotecsystem.com"
   home   :
-  github : "metalamin"
+  github : "InnotecSystem"
   twitter: *twitter
 
 defaults:

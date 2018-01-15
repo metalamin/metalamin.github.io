@@ -2,11 +2,11 @@
 
 Amine Taouirsa:
   name: "Amine Taouirsa"
-  uri: "http://thewhip.com"
-  email: "billy@rick.com"
+  #uri: "http://labs.innotecsystem.com"
   bio: "Lazy and efficient as a NOP"
   avatar: "/assets/images/bio-amine-taouirsa.jpg"
   twitter: "metalamin"
+  location: "Madrid, Spain"
 
 Borja Martinez:
   name: "Borja Martinez"
