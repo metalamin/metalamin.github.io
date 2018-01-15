@@ -48,72 +48,72 @@ con el host correcto.
 host: admin.acme.org
 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_21cf7e660923a149.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_21cf7e660923a149.png)
 
 Al realizar la petición nos percatamos que en la respuesta se fija el
 valor de una cookie (admin=no). Nuestro instinto más primario nos llevar
 a cambiar ese valor a “yes”.
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_f521a117e19f533f.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_f521a117e19f533f.png)
 
 Tampoco iba a ser tan fácil y seguimos poco a poco con las pruebas. En
 este punto apreciamos que no acepta el método GET ya que nos da un error
 405 por lo que lo cambiamos por el otro método más utilizado “POST”.
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_96e7e60775cde172.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_96e7e60775cde172.png)
 
 Ahora obtenemos el error 406. Después de fuzzear durante un rato
 ficheros encontramos read.php que nos devuelve en la respuesta un error
 diferente. Hemos avanzamos hasta el error 418, junto a lo que parece ser
 una respuesta a una query de json
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_1e9f594fab4a83f5.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_1e9f594fab4a83f5.png)
 
 A partir del error que ha devuelto el servidor, formamos una petición
 json con el valor que espera”row”. Ahora nos pide el valor “domain”.
 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_3ced3473f89bfa92.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_3ced3473f89bfa92.png)
 
 Volvemos a formar la petición json con el valor domain y vemos que nos
 faltan valores que vamos añadiendo.
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_da91554b677298f1.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_da91554b677298f1.png)
 
 
 Llegamos a formar la peticion 212.dominio.com que nos devuelve el
 siguiente directorio:
 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_cbd9b3efd576c082.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_cbd9b3efd576c082.png)
 
 Vemos que nos devuelve un campo data vacío, y a cada petición que
 hacemos con un nuevo dominio nos crea un id nuevo id=0,id=1,id=2…
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_b15c4ea3a8d34445.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_b15c4ea3a8d34445.png)
 
 Si en el dominio ponemos un dominio válido vemos que nos resuelve el
 contenido del mismo en base64, para hacer la prueba usamos el dominio
 borjmz.com que apunta a 127.0.0.1
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_490107939591b325.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_490107939591b325.png)
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_40654c2951a78258.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_40654c2951a78258.png)
 
 
 Nos devuelve la página de inicio de Apache con lo cual imaginamos que
 podríamos estar ante un SSRF. Nos disponemos a escanear y encontramos un
 servidor nginx en el puerto 1337
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_ef5135a7c198081a.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_ef5135a7c198081a.png)
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_520593c0111bb97e.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_520593c0111bb97e.png)
 
 Descodificamos el base64 y nos encontramos con la siguiente frase:
 
 - Hmm, where would it be?
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_459b46b840b8b3d3.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_459b46b840b8b3d3.png)
 
 Parece que vamos por buen camino....
 
@@ -126,31 +126,31 @@ necesitamos realizar un bypass del .com
 
 Probamos con varios caracteres pero están prohibidos:
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_6af6b66e6f348f68.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_6af6b66e6f348f68.png)
 
 
 Se hacen varias pruebas para lograr el bypass
 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_ee674661b93e1745.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_ee674661b93e1745.png)
 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_626874a3f89cb614.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_626874a3f89cb614.png)
 
 Finalmente se ha conseguido hacer el bypass con las siguiente petición:
 
-
+```
 [{"domain" :
 "212.borjmz.com/flag\\nFake:.com"}]{style="background: #f9f2f4"}
-
+```
 
 Nos llega la respuesta correctamente en base64 y al descifrar obtenemos
 la flag.
 
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/w_html_f55afe6afc3795da.png)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/2017-11-21-writeup-hackerone/w_html_f55afe6afc3795da.png)
 
-```
+```JSON
 {"data":"RkxBRzogQ0YsMmRzVlwvXWZSQVlRLlRERXBgdyJNKCVtVTtwOSs5RkR7WjQ4WCpKdHR7JXZTKCRnN1xTKTpmJT1QW1lAbmthPTx0cWhuRjxhcT1LNTpCQ0BTYip7WyV6IitAeVBiL25mRm5hPGUkaHZ7cDhyMlt2TU1GNTJ5OnovRGg7ezYK"}
 ```
 
