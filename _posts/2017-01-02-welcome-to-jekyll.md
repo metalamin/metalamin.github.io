@@ -25,7 +25,6 @@ print_hi('Tom')
 
 
 ```java
-Alex La 9, [29.01.18 17:45]
 public static void main(String[] args) {
         java.io.File file = new java.io.File ( "C:\\Users\\Administrador\\Desktop\\poc.txt" );
 
