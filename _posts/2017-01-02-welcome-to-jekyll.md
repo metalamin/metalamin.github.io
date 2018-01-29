@@ -23,6 +23,23 @@ print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 ```
 
+
+```java
+Alex La 9, [29.01.18 17:45]
+public static void main(String[] args) {
+        java.io.File file = new java.io.File ( "C:\\Users\\Administrador\\Desktop\\poc.txt" );
+
+        java.beans.XMLDecoder xd = null ;
+        try {
+            xd = new java.beans.XMLDecoder ( new BufferedInputStream ( new FileInputStream (file)));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace ();
+        }
+        Object s2 = xd.readObject ();
+        xd.close ();
+}
+```
+
 Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll's GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
 [jekyll-docs]: http://jekyllrb.com/docs/home
