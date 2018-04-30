@@ -11,9 +11,6 @@ tags:
   - Perl
   - Reversing
 
-toc: true
-toc_label: "Index"
-toc_icon: "cog"
 ---
 Recientemente, durante un pentest en mis labores como patata ninja, me he encontrado con un Perl en forma de ejecutable de Windows. Éste sirve para hacer una serie de operaciones contra el dominio y para poder autenticar parece que genera en memoria las credenciales desde un archivo de claves cifrado. ¿Cómo puedo recuperar esas credenciales?
 
