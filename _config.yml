@@ -1,5 +1,5 @@
 remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "air"
+minimal_mistakes_skin    : "contrast"
 plugins:
   - jekyll-remote-theme
   - jekyll-paginate
@@ -10,10 +10,10 @@ plugins:
 
 # Site Settings
 locale                   : "en"
-title                    : "Innotec Labs"
+title                    : "Metalamin Blog"
 title_separator          : "-"
-name                     : &name "Innotec Labs"
-description              : &description "Innotec System - Labs and Research"
+name                     : &name "Metalamin Labs"
+description              : &description "Personal Blog - Metalamin"
 url                      : "https://metalamin.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "metalamin/metalamin.github.io"
@@ -22,18 +22,18 @@ search                   : true
 
 # Social Sharing
 twitter:
-  username: &twitter "InnotecLabs"
+  username: &twitter "metalamin"
   
 # Site Author  
 author:
-  name   : "Innotec System Labs"
-  avatar : "/assets/images/Innotec.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  name   : "Amine Taouirsa"
+  avatar : "/assets/images/Bio.jpg"
+  bio: "Lazy and efficient as a NOP"
   location: "Madrid, Spain"
   email  : # optional
-  uri    : "http://labs.innotecsystem.com"
+  uri    : "http://metalamin.github.io"
   home   :
-  github : "InnotecSystem"
+  github : "metalamin"
   twitter: *twitter
 
 defaults:
@@ -47,7 +47,7 @@ defaults:
       read_time: false
       comments: true
       share: true
-      related: true
+      related: false
       
 
 # Outputting
