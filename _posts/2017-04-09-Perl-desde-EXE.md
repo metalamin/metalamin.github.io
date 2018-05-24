@@ -18,15 +18,7 @@ Una manera podría haber sido montar un controlador de dominio falso estilo Resp
 ##Análisis del ejecutable
 Un breve análisis con strings nos muestra que se trata de un script en Perl empaquetado en un ejecutable EXE. En concreto, parece que se utilizó el PerlApp de ActiveState para tal fin.
 
-{% capture fig_img %}
-![Foo]({{ "/assets/images/Perl-from-EXE/strings.png" | relative_url }})
-{% endcapture %}
-
-<figure>
-	<a href="/assets/images/Perl-from-EXE/strings.png"><img src="/assets/images/Perl-from-EXE/strings.png" align="middle"></a>
-	<figcaption>strings decode.exe | grep -i perl</figcaption>
-</figure>
-
+{% include figure image_path="/assets/images/Perl-from-EXE/strings.png" alt="strings decode.exe | grep -i perl" caption="strings decode.exe | grep -i perl" %}
 
 strings decode.exe | grep -i perl
 Hasta el momento todos los packers de Perl a EXE que me he encontrado tienen que guardar en claro el script antes de poder lanzar el interpretador. En algunos casos lo guardan en un archivo y en otros se quedan en memoria. En la muestra que nos interesa lo desempaqueta en memoria. Vamos a ver una menara de recuperarlo usando el OllyDbg.
