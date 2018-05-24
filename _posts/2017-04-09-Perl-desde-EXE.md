@@ -15,15 +15,22 @@ Hace tiempo, durante uno de mi de Red Team, me he encontrado con un Perl en form
 
 Una manera podría haber sido montar un controlador de dominio falso estilo Responder. Pero… ¿Por qué hacerlo fácil? Además, tenía curiosidad en averiguar que método de cifrado se usa, por si me volvía a encontrar algo parecido más adelante durante el pentest.
 
-##Análisis del ejecutable
+## Análisis del ejecutable
 Un breve análisis con strings nos muestra que se trata de un script en Perl empaquetado en un ejecutable EXE. En concreto, parece que se utilizó el PerlApp de ActiveState para tal fin.
 
-{% include figure image_path="/assets/images/Perl-from-EXE/strings.png" alt="strings decode.exe | grep -i perl" caption="strings decode.exe | grep -i perl" %}
+{% include figure image_path="/assets/images/Perl-from-EXE/strings.png" alt="strings decode.exe | grep -i perl" %}
 
 strings decode.exe | grep -i perl
+
+<figure style="width: auto" class="align-right">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/strings.png" alt="">
+  <figcaption>strings decode.exe | grep -i perl</figcaption>
+</figure> 
+
+
 Hasta el momento todos los packers de Perl a EXE que me he encontrado tienen que guardar en claro el script antes de poder lanzar el interpretador. En algunos casos lo guardan en un archivo y en otros se quedan en memoria. En la muestra que nos interesa lo desempaqueta en memoria. Vamos a ver una menara de recuperarlo usando el OllyDbg.
 
-##Recuperando el Perl
+## Recuperando el Perl
 Cargamos el ejecutable en el OllyDbg. Pero antes de lanzar la ejecución vamos a poner un breakpoint en algún punto después de la carga del script.
 
 Para ello primero mostramos las cadenas de texto.
