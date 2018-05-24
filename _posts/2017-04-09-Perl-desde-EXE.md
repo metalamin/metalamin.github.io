@@ -18,8 +18,8 @@ Una manera podría haber sido montar un controlador de dominio falso estilo Resp
 ## Análisis del ejecutable
 Un breve análisis con strings nos muestra que se trata de un script en Perl empaquetado en un ejecutable EXE. En concreto, parece que se utilizó el PerlApp de ActiveState para tal fin.
 
-<figure style="width: 100%" class="align-center">
-  <img src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/strings.png" alt="">
+<figure class="align-center">
+  <img style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/strings.png" alt="">
   <figcaption>strings decode.exe | grep -i perl</figcaption>
 </figure> 
 
