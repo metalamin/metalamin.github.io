@@ -9,9 +9,7 @@ $x-large: 1600px !default;
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-.page__content {
-  text-align: justify;
-}
+
 
 html {
     font-size: 15px;
@@ -28,16 +26,3 @@ html {
     }
 }
 
-figure {
-    text-align: center;
-}
-
-figure a{
-    text-align: center;
-}
-figure img {
-    vertical-align: top;
-}
-figure figcaption {
-    text-align: center;
-}
