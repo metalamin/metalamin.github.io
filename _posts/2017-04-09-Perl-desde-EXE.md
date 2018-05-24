@@ -23,7 +23,7 @@ Un breve análisis con strings nos muestra que se trata de un script en Perl emp
 {% endcapture %}
 
 <figure>
-	<a href="/assets/images/Perl-from-EXE/strings.png"><img src="/assets/images/Perl-from-EXE/strings.png"></a>
+	<a href="/assets/images/Perl-from-EXE/strings.png"><img src="/assets/images/Perl-from-EXE/strings.png" align="middle"></a>
 	<figcaption>strings decode.exe | grep -i perl</figcaption>
 </figure>
 
