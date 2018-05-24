@@ -20,7 +20,7 @@ Un breve análisis con strings nos muestra que se trata de un script en Perl emp
 
 <figure class="align-center">
   <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/strings.png" alt="">
-  <figcaption class="align-center">strings decode.exe | grep -i perl</figcaption>
+  <figcaption style="text-align: center">strings decode.exe | grep -i perl</figcaption>
 </figure> 
 
 
