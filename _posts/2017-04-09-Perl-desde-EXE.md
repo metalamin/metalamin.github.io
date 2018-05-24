@@ -8,7 +8,15 @@ tags:
   - OllyDbg
   - Perl
   - Reversing
-
+gallery1:
+          - url: /assets/images/Perl-from-EXE/referenced.png
+            image_path: /assets/images/Perl-from-EXE/referenced.png
+            alt: "Referenced strings"
+            title: "Referenced strings"
+          - url: /assets/images/Perl-from-EXE/strings_2.png
+            image_path: /assets/images/Perl-from-EXE/strings_2.png
+            alt: "Strings"
+            title: "Strings"
 ---
 Hace tiempo, durante uno de mi de Red Team, me he encontrado con un Perl en forma de ejecutable de Windows. Éste sirve para hacer una serie de operaciones contra el dominio y para poder autenticar parece que genera en memoria las credenciales desde un archivo de claves cifrado. ¿Cómo puedo recuperar esas credenciales?
 
@@ -31,10 +39,9 @@ Cargamos el ejecutable en el OllyDbg. Pero antes de lanzar la ejecución vamos a
 
 Para ello primero mostramos las cadenas de texto.
 
-Referenced strings
-Referenced strings
-Strings
-Strings
+{% include gallery id="gallery1" %}
+
+
 Sabemos que después de desempaquetar el script, el ejecutable tiene que montar la cadena para la llamada del interprete Perl. Vamos a buscar las cadenas que parezcan argumentos para el lanzamiento del interprete de Perl y parar la ejecución en ese punto. Elegimos algunas de las cadenas y fijamos el breakpoint apretando F2.
 
 Strings de parámetros
