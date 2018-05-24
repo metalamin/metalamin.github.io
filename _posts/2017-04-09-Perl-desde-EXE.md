@@ -44,23 +44,42 @@ Para ello primero mostramos las cadenas de texto.
 
 Sabemos que después de desempaquetar el script, el ejecutable tiene que montar la cadena para la llamada del interprete Perl. Vamos a buscar las cadenas que parezcan argumentos para el lanzamiento del interprete de Perl y parar la ejecución en ese punto. Elegimos algunas de las cadenas y fijamos el breakpoint apretando F2.
 
-Strings de parámetros
-Strings de parámetros
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/strings_4.png" alt="">
+  <figcaption style="text-align: center">Strings de parámetros</figcaption>
+</figure>
+
 Ya estamos listos para arrancar el programa apretando F9.
-Ejecución parada
-Ejecución parada
+
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/stop.png" alt="">
+  <figcaption style="text-align: center">Ejecución parada</figcaption>
+</figure>
+
 Una vez parado en nuestro breakpoint, abrimos el Memory Map pulsando “Alt+M“.
-Memory Map
-Memory Map
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/memory.png" alt="">
+  <figcaption style="text-align: center">Memory Map</figcaption>
+</figure>
+
 Con la ventana de memoria abierta hacemos una búsqueda (Ctrl+B) de cadenas que puedan contener el script que buscamos. Por ejemplo, las llamadas a las librerías en perl que empiezan por “use “ (nótese el espacio al final).
-Búsqueda de cadenas
-Búsqueda de cadenas
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/busqueda.png" alt="">
+  <figcaption style="text-align: center">Búsqueda de cadenas</figcaption>
+</figure>
+
 Ya obtenemos el script en memoria y sabemos donde se encuentra. Tan solo queda guardar ese segmento de memoria en un archivo y quedarnos con el script.
-Backup
-Backup
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/backup.png" alt="">
+  <figcaption style="text-align: center">Backup</figcaption>
+</figure>
+
 Y con esto hemos recuperado el script entero incluidos los comentarios del programador.
-Script Perl recuperado
-Script Perl recuperado
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/recovered.png" alt="">
+  <figcaption style="text-align: center">Script Perl recuperado</figcaption>
+</figure>
+
  
 
 Seguramente podríamos haberlo hecho de manera más elegante o más rápida, pero ésta es la que se me ocurrió en el momento y quise compartir.
