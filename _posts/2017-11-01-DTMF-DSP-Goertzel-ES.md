@@ -22,9 +22,12 @@ gallery1:
 ---
 
 El cálculo de todos los valor de la DFT no es necesario a la hora de implementar un detector DTMF, entonces hacer la FFT puede suponer un peso computacional innecesario y mejorable. Por lo que se hace uso del Algoritmo de Goertzel que permite calcular la DFT únicamente en las frecuencias deseadas para comprobar la presencia del par de tonos que corresponden al número marcado.
+
 En este trabajo del laboratorio de tratamiento digital de la señal se pide implementar el citado Algoritmo de Goertzel que permite calcular un valor de X[k] mediante un ﬁltrado.
+
 El objetivo del trabajo y de la ampliación es de obtener un detector funcional de marcación DTMF con una salida visual por el osciloscopio. La implementación se hace sobre la placa de desarrollo EZKIT-Lite de Analog Devices basada en el ADSP-2181 del mismo fabricante.
 El algoritmo explicado en el documento del enunciado consiste en 2 partes: Una recursiva mientras se reciben datos, y la segunda que se hace cada N muestras para calcular el resultado de la DFT. 
+
 En pseudo código tenemos que implementar lo siguiente:
 ```matlab
 s_prev = 0;

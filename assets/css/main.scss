@@ -1,4 +1,6 @@
----
+
+
+8---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
@@ -11,6 +13,10 @@ $x-large: 1600px !default;
 
 .page__content {
   text-align: justify;
+}
+
+.sidebar p{
+  font-size: 0.9em;
 }
 
 html {
@@ -28,3 +34,4 @@ html {
     }
 }
 
+9
