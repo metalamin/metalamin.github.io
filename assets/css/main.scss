@@ -13,13 +13,6 @@ $x-large: 1600px !default;
   text-align: justify;
 }
 
-.sidebar p{
-  font-size: 0.9em;
-}
-.sidebar li{
-  font-size: 0.9em;
-}
-
 html {
     font-size: 15px;
     @include breakpoint($medium) {
