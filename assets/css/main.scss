@@ -13,7 +13,10 @@ $x-large: 1600px !default;
   text-align: justify;
 }
 
-.sidebar p {
+.sidebar p{
+  font-size: 0.9em;
+}
+.sidebar li{
   font-size: 0.9em;
 }
 
