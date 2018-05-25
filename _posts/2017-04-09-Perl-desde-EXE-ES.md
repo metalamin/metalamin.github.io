@@ -1,8 +1,8 @@
 ---
-title: "Recuperar un Perl desde un EXE"
+title: "Recuperar un Perl desde un EXE (ES)"
 excerpt: "Como recuperar Perl empaquetado en EXE con PerlApp de ActiveState "
 header:
-  teaser: "/assets/images/Perl-from-EXE/teaser.png"
+  teaser: "/assets/images/Perl-from-EXE/teaser_es.png"
 tags:
   - ES
   - OllyDbg
