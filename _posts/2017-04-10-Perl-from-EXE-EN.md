@@ -49,7 +49,7 @@ We are now ready to start the program by pressing **F9**.
 
 <figure class="align-center">
   <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Perl-from-EXE/stop.png" alt="">
-  <figcaption style="text-align: center">Stopped execution/figcaption>
+  <figcaption style="text-align: center">Stopped execution</figcaption>
 </figure>
 
 Once we have stopped at our breakpoint, we open the Memory Map by pressing **"Alt+M"**.
