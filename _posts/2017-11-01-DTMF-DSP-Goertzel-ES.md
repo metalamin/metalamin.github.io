@@ -9,7 +9,7 @@ tags:
   - SQL Injection
   - Path Traversal
   - RCE
-published: false
+hidden: true
 gallery1:
           - url: /assets/images/Perl-from-EXE/referenced.png
             image_path: /assets/images/Perl-from-EXE/referenced.png
@@ -30,7 +30,7 @@ En pseudo código tenemos que implementar lo siguiente:
 s_prev = 0;
 s_prev2 = 0;
 normalized_frequency = target_frequency / sample_rate;
-coeff = 2∗ cos (2∗ PI∗ normalized_frequency );
+coeff = 2 * cos (2* PI* normalized_frequency );
 for each sample , x [ n ] , 
 	s = x [ n ] + coeff ∗ s_prev − s_prev2 ; 
 	s_prev2 = s_prev ; 
