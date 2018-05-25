@@ -29,8 +29,10 @@ I hope that making a public full disclosure will help to get these servers secur
 
 ## Summary
 The form creation platform MachForm from Appnitro is subject to SQL injections that lead to path traversal and arbitrary file upload.
-The application is widely deployed and with some google dorks it's possible to find various webpages storing sensitive data as credit card numbers with corresponding security codes.
-Also, the arbitrary file upload can let an attacker get control of the server by uploading a *WebShell*.
+
+The application is widely deployed and with some google dorks it's possible to find various webpages storing sensitive data as credit card numbers with corresponding security codes. Also, the arbitrary file upload can let an attacker get control of the server by uploading a *WebShell*.
+
+Affected versions go from version **3.0** until the fixed version **4.2.3** 
 
 ## SQL injection 
 (Provisional CVE-2018-6410)
@@ -79,7 +81,7 @@ Which is the *base64* encoding for:
 ```
 Note that hash is the MD5 of the corresponding filename:
 
-`md5("../../../../../../../../../../../../../../../../etc/passwd")=402ba0230d6f44a2de590ac11107a458`
+`md5("../../../../../../../../../../../../../../../../etc/passwd") = 402ba0230d6f44a2de590ac11107a458`
 
 ## Bypass file upload filter 
 (Provisional CVE-2018-6411)
