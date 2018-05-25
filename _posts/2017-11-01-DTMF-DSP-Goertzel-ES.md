@@ -50,11 +50,11 @@ magnitude^2= Q_1^2+Q_2^2-Q_1*Q_2^2*coef
 $$
 
 
-## Trabajo previo
+# Trabajo previo
 Para poder implementar el algoritmo de Goertzel en el DSP necesitamos calcular una serie de valores.
 
 
-### Valor de N
+## Valor de N
 **N** corresponde al numero de muestras que se hacen en la parte recursiva antes de hacer el cálculo ﬁnal del valor de la DFT. Fijamos una resolución del análisis espectral a 10Hz y haremos el calculo partiendo de este requerimiento. 
 
 Siendo **k** los diferentes coeﬁcientes en los que se puede calcular la DFT. Tenemos: 
@@ -69,7 +69,7 @@ $$
 N=\frac{f_s}{f_{tono}}=\frac{8000}{10}=800
 $$
 
-### Escalado de la señal de entrada
+## Escalado de la señal de entrada
 
 Para evitar saturación del ﬁltro necesitamos hacer un escalado de la señal de entrada. 
 
@@ -82,14 +82,14 @@ $$
 
 Por lo tanto hay que realizar un escalado en el DSP de 40. De esta manera se evitar la saturación.
 
-### Valores de los coeﬁcientes
+## Valores de los coeﬁcientes
 Como se pretende detectar los 8 tonos de la tabla DTMF, tendremos que calcular los coeﬁcientes correspondientes.
 
 $$
 Coef=2*cos(2\pi*\frac{f_{tono}}{f_s})
 $$
 
-Para poder guardar los valores en coma ﬁja en el DSP queremos que tengan un valor absoluto inferior a la unidad. Calculamos el valor de coseno solo y ya lo multiplicaremos por 2 a posteriori.
+Para poder guardar los valores en coma ﬁja en el DSP queremos que tengan un valor absoluto inferior a la unidad. Calculamos el valor de coseno solo y ya lo multiplicaremos por 2 a posteriori. A continuación, tenemos la tabla de los coeficientes. (la mitad)
 
 |Frecuencia|Coeficiente|Valor en el DSP|
 |--|--|--|
@@ -102,3 +102,17 @@ Para poder guardar los valores en coma ﬁja en el DSP queremos que tengan un va
 1477 |0,3993 |13085 |
 1633 |0,2843 |9315|
 
+
+## Amplitud de detección de tono 
+
+El valor del tono detectado tiene que ser superior al 20% de la amplitud máxima de entrada para considerarse positivo. 
+Tenemos que el valor máximo a la entrada es de 40 (en el DSP) por el escalado. Por lo que ﬁjaremos el umbral al 20% de 40
+$$
+umbral=40*20/100=8
+$$
+Se considerará el tono detectado cuando supere ese umbral.
+
+# Programa en MATLAB
+Antes de empezar a programar en el DSP se trabaja en MATLAB para veriﬁcar el funcionamiento correcto del algoritmo. 
+
+El archivo correspondiente de MATLAB es migoertzel.m XX e implementa la función:
