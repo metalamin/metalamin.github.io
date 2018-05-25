@@ -62,7 +62,7 @@ el= (SELECT 1 FROM(SELECT COUNT(*),CONCAT(0x2020,(SELECT MID((user_email),1,50) 
 ```
 <figure class="align-center">
   <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/MachForm-not-0-day/sqli.png" alt="">
-  <figcaption style="text-align: center">Ejecución parada</figcaption>
+  <figcaption style="text-align: center">SQLi Server Response</figcaption>
 </figure>
 
 ## Path traversal 
