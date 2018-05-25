@@ -28,7 +28,7 @@ twitter:
 author:
   name   : "Amine Taouirsa"
   avatar : "/assets/images/Bio.png"
-  bio: "How about ... "xchg eax, eax"!!"
+  bio: "How about ... 'xchg eax, eax'!!"
   location: "Madrid, Spain"
   email  : # optional
   uri    : "http://metalamin.github.io"
