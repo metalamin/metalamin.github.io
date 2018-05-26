@@ -2,24 +2,31 @@
 title: "DTMF con algoritmo de Goertzel en ADSP-2181"
 excerpt: "Detector de tonos DTMF con algoritmo de Goertzel en ADSP-2181"
 header:
-  teaser: "/assets/images/goertzel/teaser.png"
+  teaser: "/assets/images/DTMF-DSP/DSP.jpg"
 tags:
-  - EN
-  - Machform
-  - SQL Injection
-  - Path Traversal
-  - RCE
-hidden: true
+  - ES
+  - ADSP
+  - DTMF
+  - Goertzel
+  - DSP
 usemathjax: true
 gallery1:
-          - url: /assets/images/Perl-from-EXE/referenced.png
-            image_path: /assets/images/Perl-from-EXE/referenced.png
-            alt: "Referenced strings"
-            title: "Referenced strings"
-          - url: /assets/images/Perl-from-EXE/strings_2.png
-            image_path: /assets/images/Perl-from-EXE/strings_2.png
-            alt: "Strings"
-            title: "Strings"
+          - url: /assets/images/DTMF-DSP/nada.jpg
+            image_path: /assets/images/DTMF-DSP/nada.jpg
+            alt: "Salida correspondiente a ’Nada Detectado’"
+            title: "Salida correspondiente a ’Nada Detectado’"
+          - url: /assets/images/DTMF-DSP/0.jpg
+            image_path: /assets/images/DTMF-DSP/0.jpg
+            alt: "Salida correspondiente al ’0’"
+            title: "Salida correspondiente al ’0’"
+          - url: /assets/images/DTMF-DSP/5.jpg
+            image_path: /assets/images/DTMF-DSP/5.jpg
+            alt: "Salida correspondiente al ’5’"
+            title: "Salida correspondiente al ’5’"
+          - url: /assets/images/DTMF-DSP/9.jpg
+            image_path: /assets/images/DTMF-DSP/9.jpg
+            alt: "Salida correspondiente al ’9’"
+            title: "Salida correspondiente al ’9’"
 ---
 
 El cálculo de todos los valor de la DFT no es necesario a la hora de implementar un detector DTMF, entonces hacer la FFT puede suponer un peso computacional innecesario y mejorable. Por esa razón se hace uso del Algoritmo de Goertzel que permite calcular la DFT únicamente en las frecuencias deseadas para comprobar la presencia del par de tonos que corresponden al número marcado.
@@ -46,7 +53,7 @@ power = s_prev2 ∗ s_prev2 + s_prev ∗ s_prev − coeff ∗ s_prev ∗ s_prev2
 Vemos que la segunda parte es un poco diferente ya que es una manera “optimizada” de obtener el resultado.
 
 $$
-magnitude^2= Q_1^2+Q_2^2-Q_1*Q_2^2*coef
+magnitude^2= Q_1^2+Q_2^2-Q_1*Q_2*coef
 $$
 
 
@@ -186,7 +193,7 @@ Vemos que el valor de q1 se va haciendo mas grande hasta llegar a las N muestras
 Después de N muestras se hace el calculo ﬁnal.
 ```matlab
 ar=dm( coef1 ); 
-my0=1; mr=ar ∗my0( ss ); 
+my0=1; mr=ar *my0( ss ); 
 ar=mr0;				{ coef * 2}
 
 mx0=dm( i2 ,m2);	{Obtener q1 dos veces} 
@@ -199,4 +206,120 @@ mr=mr+mx0*my0( ss );	{q1^1−q1*q2* coef}
 mr=mr+mx1*my1( ss );	{q2^2+q1^2−q1*q2* coef} 
 dm( sqr1 )=mr1;
 ```
+Comparar con el umbral y encender el LED. Finalmente hay que reinicializar a 0 los valores.
 
+```matlab
+salida:
+	ay0=dm( umbral );
+	ax0=dm( sqr1 );
+	ar=ax0 − ay0 ; 
+	if lt jump apagado; 
+	ax0=dm( sqr2 );
+	ar=ax0 − ay0; 
+	if lt jump apagado; 
+	set fl1;
+	rts;
+apagado :
+	reset fl1; 
+	rts;
+```
+
+## Decodificador DTMF
+El archivo ’[goertzel.dsp](https://github.com/metalamin/DSP-Goertzel/blob/master/goertzel.dsp)’ consigue decodiﬁcar la marcación telefónica mediante la detección de 8 tonos correspondientes a la tabla DTMF . Para ello implementa el algoritmo de Goertzel sin el buffer circular pues necesita guardar 16 valores de q. Es posible implementarlo con buffers circulares pero la complejidad ha impedido que se pueda hacer en poco tiempo.
+
+Se ha modiﬁcado el programa anterior para hacer los cálculos de los valores intermedios a cada muestra en un bucle para rellenar los 16 valores del vector.
+
+```matlab
+cntr=tonos; 				{Repetimos para cada tono}
+do parte1 until ce;
+	mx0=dm(i2,m1);
+	my0=dm(i5,m4);			{Cargamos q1 y coeficiente}
+	mr=mx0*my0(ss), ay0=dm(i2,m3);
+							{q1*coef, obtener q2}
+	my0=1;
+	mr=mr1*my0(ss); 		{q1*2*cos(alpha)}
+	ar=mr0-ay0;				{q1*2*coef - q2}
+	ar=ar+ay1;				{q1*2*coef - q2 + entrada}
+	dm(i2,m1)=ar;			{suma -> q1}
+parte1: dm(i2,m1)=mx0;		{q1 -> q2}
+```
+
+Vemos que en este caso el código es mejorable pues en cada pasada mueve de sitio los valores en la memoria.
+
+Luego se calculan los valores ﬁnales de la misma manera que el programa anterior y se guardan en un vector.
+
+Finalmente para decodiﬁcar el número correspondiente, se hace mediante una serie de condiciones. Se ha obviado el caso de las combinaciones que no corresponden a números para facilitar la diferenciación en el osciloscopio.
+
+```matlab
+salida:
+	ay0=dm(umbral);
+	mx0=0;
+	
+	ax0=dm(sqr);
+	ar=ax0 - ay0;
+	if ge jump fila0;
+	ax0=dm(sqr+1);
+	ar=ax0 - ay0;
+	if ge jump fila1;
+	ax0=dm(sqr+2);
+	ar=ax0 - ay0;
+	if ge jump fila2;
+	ax0=dm(sqr+3);
+	ar=ax0 - ay0;
+	if ge jump fila3;
+	mx0=0;
+	jump sacaresul;
+	rts;
+	
+fila0:
+	ax0=dm(sqr+4);
+	ar=ax0 - ay0;
+	mx0=6400;						{Nivel a sacar para '1'}
+	if ge jump sacaresul;
+	ax0=dm(sqr+5);
+	ar=ax0 - ay0;
+	mx0=9600;						{Nivel a sacar para '2'}
+	if ge jump sacaresul;
+	ax0=dm(sqr+6);
+	ar=ax0 - ay0;
+	mx0=12800;						{Nivel a sacar para '3'}
+	if ge jump sacaresul;
+	ax0=dm(sqr+7);
+	ar=ax0 - ay0;
+	mx0=0;
+	if ge jump sacaresul;
+	
+	mx0=0;
+	jump sacaresul;
+....
+
+....
+sacaresul:
+	dm(cambia)=mx0;
+	rts;
+```
+
+## Problemas encontrados
+No se puede hacer debug y ver los valores intermedios. Aunque tenemos algunos métodos de feedback que consisten en un led y la salida analógica. Pero la salida no puede ser constante por lo que hay que hacer pequeños ’hacks’ para saltar esta limitación. El truco consiste en alternar el valor entre positivo y negativo para evitar la continua. 
+
+En caso de que deseamos más velocidad, podemos usar una velocidad de muestreo de 48kHz y multiplicar los tonos buscados por 6. 
+
+El primer problema encontrado fue al escalar de manera errónea la entrada, entonces siempre se obtienen datos que parecen aleatorios cerca de el tono buscado. Sólo al alejarse lo suﬁciente se obtenía una respuesta nula. Fue debido al cálculo del escalado necesario tomando la primera parte como un ﬁltro normal. 
+
+Luego durante alguna modiﬁcación se declaró de manera errónea una variable en el espacio de programa pero se cargaba esa variable desde la memoria de datos. Por lo visto el compilador no se queja ni avisa de este desliz.
+
+Finalmente, al usar el puntero i3 el programa se colgaba de manera que había que apagar el DSP para poder reinicializarlo. Eso es porque el programa base ya usa ese puntero y hay que evitar reutilizarlo.
+
+# Resultado
+Se ha hecho la prueba con tonos desde el generador de de señales usando una modulación AM para emular los dos tonos y luego conectando la entrada a la salida audio del PC. El detector de DTMF funciona, incluso al bajar el volumen y con música reproduciéndose al mismo tiempo. 
+
+Para ver la salida en el osciloscopio se ha puesto el nivel de GND en la parte baja de la pantalla de manera que si no se detecta ningún numero no se vea nada.
+
+Luego a cada número, del 0 al 9, corresponde un nivel de manera creciente. Aprovechamos toda la pantalla des oscilloscopio para diferenciar fácilmente los números. Vemos unos ejemplos:
+
+{% include gallery id="gallery1" %}
+
+# Psibles mejoras
+El código no esta optimizado, se puede mejorar haciendo uso de memoria de programa y de datos de manera alterna, luego haciendo uso de buffers circulares. 
+
+Podemos incluir detección de tonos erróneos (2 tonos columna o 2 tonos ﬁla) para encender el LED como error y mejorar el algoritmo de decodiﬁcación del numero
