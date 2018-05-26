@@ -56,6 +56,12 @@ paginate: 5 # amount of posts to show
 paginate_path: /page:num/
 timezone: Europe/Madrid # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
+#Google Analytics
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-76198646-2"
+
 
 # HTML Compression
 # - http://jch.penibelst.de/
