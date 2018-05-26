@@ -115,4 +115,88 @@ Se considerará el tono detectado cuando supere ese umbral.
 # Programa en MATLAB
 Antes de empezar a programar en el DSP se trabaja en MATLAB para veriﬁcar el funcionamiento correcto del algoritmo. 
 
-El archivo correspondiente de MATLAB es migoertzel.m XX e implementa la función:
+El archivo correspondiente de MATLAB es [migoertzel.m](https://github.com/metalamin/DSP-Goertzel/blob/master/migoertzel.m) e implementa la función:
+
+$$
+y = migoertzel(x)
+$$
+
+El programa primero inicializa los valores y luego ejecuta 2 bucles: Uno para hacer ventanas de 800 muestras y luego el bucle correspondiente a la primera parte del algoritmo. Finalmente calcula el valor ﬁnal para todos los tonos. 
+
+No saca el valor del dígito marcado pero se puede apreciar fácilmente en que momentos se supera el umbral de los tonos. 
+
+Sea x la señal muestreada a 8000Hz se usa de la siguiente manera:
+```matlab
+>> x= sin (2* pi * t *770) ; % 770Hz
+>> y= migoertzel (x /800) *2^15; 
+>> round (y ) 
+ans = 0 8132 0 0 0 0 0 0
+```
+
+Vemos que se ha dividido la señal por N para hacer el escalado que tendríamos que hacer en el DSP. En este ejemplo se aprecia como detecta perfectamente el segundo tono correspondiente a la frecuencia 770 Hz. Si se hace con un tono puro y amplitud máxima de entrada vemos que los valores son son próximos a 8000, superando con varios ordenes de magnitud el umbral. 
+
+Probamos a ver si con una frecuencia cercana da un falso positivo.
+
+```matlab
+>> x= sin (2* pi * t *760) ; % 760Hz
+>> y= migoertzel (x /800) *2^15; 
+>> round (y ) 
+ans = 0 0 0 0 0 0 0 0
+```
+
+No se detecta la frecuencia en este caso. Por lo que se comporta como es deseado.
+
+# Programa en MATLAB
+Partimos de la simple detección de la marcación del 0 que enciende un led, luego se amplia para detectar los 8 tonos y sacar por el osciloscopio una respuesta que caracteriza cada numero. 
+
+## Detector de marcación del Cero.
+
+Esta primera parte consigue la detección de 2 tonos correspondientes al ’0’. Para ello implementa el algoritmo de Goertzel con buffer circular para ir haciendo la parte recursiva. Luego se repite el mismo código para cada tono (2 veces).
+
+
+```matlab
+mx0=dm( i2 ,m2); 
+my0=dm( coef1 );	{Cargamos q1 y coef } 
+mr=mx0*my0( ss );	{q1* cos ( alpha ) }
+
+my0=1; 
+mr=mr1*my0( ss );	{q1 *2* cos ( alpha ) } 
+ar=mr0;
+
+mx0 = dm( rx_buf + 1); { input } 
+my0=dm( ganancia );
+mr=mx0*my0( ss ); 
+ay0=mr1; 
+ar=ar+ay0;			{ input+q1 *2* cos ( alpha ) } 
+ay0=dm( i2 ,m3);	{cargamos q2}
+
+ar=ar−ay0;			{ input+q1 *2* cos ( alpha )−q2} 
+dm( i2 ,m3)=ar ;
+``` 
+
+Si queremos ver si funciona bien sacamos por la pantalla los valores de q1 o de q2 por el osciloscopio cada muestra. Y debería dar algo parecido a la siguiente ﬁgura cuando en la entrada se introduce el tono correspondiente.
+
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/DTMF-DSP/DSP.jpg" alt="">
+  <figcaption style="text-align: center">Señal correspondiente a los valores de q1</figcaption>
+</figure>
+
+Vemos que el valor de q1 se va haciendo mas grande hasta llegar a las N muestras. Entonces se usan los valores y se vuelve a reinicializar para dejarlo preparado para la siguiente pasada de N muestras.
+
+Después de N muestras se hace el calculo ﬁnal.
+```matlab
+ar=dm( coef1 ); 
+my0=1; mr=ar ∗my0( ss ); 
+ar=mr0;				{ coef * 2}
+
+mx0=dm( i2 ,m2);	{Obtener q1 dos veces} 
+my0=mx0; 
+mx1=dm( i2 ,m2);	{Obtener q2 dos veces} 
+my1=mx1;
+mr=0; mf=mx0*my1( ss );	{q1*q2} 
+mr=mr − ar ∗mf( ss );	{−q1*q2* coef} 
+mr=mr+mx0*my0( ss );	{q1^1−q1*q2* coef}
+mr=mr+mx1*my1( ss );	{q2^2+q1^2−q1*q2* coef} 
+dm( sqr1 )=mr1;
+```
+
