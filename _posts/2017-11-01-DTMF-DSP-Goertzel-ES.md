@@ -319,7 +319,7 @@ Luego a cada número, del 0 al 9, corresponde un nivel de manera creciente. Apro
 
 {% include gallery id="gallery1" %}
 
-# Psibles mejoras
+# Posibles mejoras
 El código no esta optimizado, se puede mejorar haciendo uso de memoria de programa y de datos de manera alterna, luego haciendo uso de buffers circulares. 
 
 Podemos incluir detección de tonos erróneos (2 tonos columna o 2 tonos ﬁla) para encender el LED como error y mejorar el algoritmo de decodiﬁcación del numero
