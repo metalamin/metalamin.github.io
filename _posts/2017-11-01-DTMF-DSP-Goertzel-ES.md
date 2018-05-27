@@ -2,7 +2,7 @@
 title: "DTMF con algoritmo de Goertzel en ADSP-2181"
 excerpt: "Detector de tonos DTMF con algoritmo de Goertzel en ADSP-2181"
 header:
-  teaser: "/assets/images/DTMF-DSP/DSP.jpg"
+  teaser: "/assets/images/DTMF-DSP/teaser.jpg"
 tags:
   - ES
   - ADSP
@@ -71,11 +71,11 @@ magnitude^2= Q_1^2+Q_2^2-Q_1*Q_2*coef
 $$
 
 
-# Trabajo previo
+## Trabajo previo
 Para poder implementar el algoritmo de Goertzel en el DSP necesitamos calcular una serie de valores.
 
 
-## Valor de N
+### Valor de N
 **N** corresponde al numero de muestras que se hacen en la parte recursiva antes de hacer el cálculo ﬁnal del valor de la DFT. Fijamos una resolución del análisis espectral a 10Hz y haremos el calculo partiendo de este requerimiento. 
 
 Siendo **k** los diferentes coeﬁcientes en los que se puede calcular la DFT. Tenemos: 
@@ -90,7 +90,7 @@ $$
 N=\frac{f_s}{f_{tono}}=\frac{8000}{10}=800
 $$
 
-## Escalado de la señal de entrada
+### Escalado de la señal de entrada
 
 Para evitar saturación del ﬁltro necesitamos hacer un escalado de la señal de entrada. 
 
@@ -103,7 +103,7 @@ $$
 
 Por lo tanto hay que realizar un escalado en el DSP de 40. De esta manera se evitar la saturación.
 
-## Valores de los coeﬁcientes
+### Valores de los coeﬁcientes
 Como se pretende detectar los 8 tonos de la tabla DTMF, tendremos que calcular los coeﬁcientes correspondientes.
 
 $$
@@ -124,7 +124,7 @@ Para poder guardar los valores en coma ﬁja en el DSP queremos que tengan un va
 1633 |0,2843 |9315|
 
 
-## Amplitud de detección de tono 
+### Amplitud de detección de tono 
 
 El valor del tono detectado tiene que ser superior al 20% de la amplitud máxima de entrada para considerarse positivo. 
 Tenemos que el valor máximo a la entrada es de 40 (en el DSP) por el escalado. Por lo que ﬁjaremos el umbral al 20% de 40
@@ -133,7 +133,7 @@ umbral=40*20/100=8
 $$
 Se considerará el tono detectado cuando supere ese umbral.
 
-# Programa en MATLAB
+## Programa en MATLAB
 Antes de empezar a programar en el DSP se trabaja en MATLAB para veriﬁcar el funcionamiento correcto del algoritmo. 
 
 El archivo correspondiente de MATLAB es [migoertzel.m](https://github.com/metalamin/DSP-Goertzel/blob/master/migoertzel.m) e implementa la función:
@@ -167,10 +167,10 @@ ans = 0 0 0 0 0 0 0 0
 
 No se detecta la frecuencia en este caso. Por lo que se comporta como es deseado.
 
-# Programa en MATLAB
+## Programa en DSP
 Partimos de la simple detección de la marcación del 0 que enciende un led, luego se amplia para detectar los 8 tonos y sacar por el osciloscopio una respuesta que caracteriza cada numero. 
 
-## Detector de marcación del Cero.
+### Detector de marcación del Cero.
 
 Esta primera parte consigue la detección de 2 tonos correspondientes al ’0’. Para ello implementa el algoritmo de Goertzel con buffer circular para ir haciendo la parte recursiva. Luego se repite el mismo código para cada tono (2 veces).
 
@@ -238,7 +238,7 @@ apagado :
 	rts;
 ```
 
-## Decodificador DTMF
+### Decodificador DTMF
 El archivo ’[goertzel.dsp](https://github.com/metalamin/DSP-Goertzel/blob/master/goertzel.dsp)’ consigue decodiﬁcar la marcación telefónica mediante la detección de 8 tonos correspondientes a la tabla DTMF . Para ello implementa el algoritmo de Goertzel sin el buffer circular pues necesita guardar 16 valores de q. Es posible implementarlo con buffers circulares pero la complejidad ha impedido que se pueda hacer en poco tiempo.
 
 Se ha modiﬁcado el programa anterior para hacer los cálculos de los valores intermedios a cada muestra en un bucle para rellenar los 16 valores del vector.
@@ -313,7 +313,7 @@ sacaresul:
 	rts;
 ```
 
-## Problemas encontrados
+### Problemas encontrados
 No se puede hacer debug y ver los valores intermedios. Aunque tenemos algunos métodos de feedback que consisten en un led y la salida analógica. Pero la salida no puede ser constante por lo que hay que hacer pequeños ’hacks’ para saltar esta limitación. El truco consiste en alternar el valor entre positivo y negativo para evitar la continua. 
 
 En caso de que deseamos más velocidad, podemos usar una velocidad de muestreo de 48kHz y multiplicar los tonos buscados por 6. 
@@ -324,7 +324,7 @@ Luego durante alguna modiﬁcación se declaró de manera errónea una variable 
 
 Finalmente, al usar el puntero i3 el programa se colgaba de manera que había que apagar el DSP para poder reinicializarlo. Eso es porque el programa base ya usa ese puntero y hay que evitar reutilizarlo.
 
-# Resultado
+## Resultado
 Se ha hecho la prueba con tonos desde el generador de de señales usando una modulación AM para emular los dos tonos y luego conectando la entrada a la salida audio del PC. El detector de DTMF funciona, incluso al bajar el volumen y con música reproduciéndose al mismo tiempo. 
 
 Para ver la salida en el osciloscopio se ha puesto el nivel de GND en la parte baja de la pantalla de manera que si no se detecta ningún numero no se vea nada.
@@ -333,7 +333,7 @@ Luego a cada número, del 0 al 9, corresponde un nivel de manera creciente. Apro
 
 {% include gallery id="gallery1" %}
 
-# Posibles mejoras
+## Posibles mejoras
 El código no esta optimizado, se puede mejorar haciendo uso de memoria de programa y de datos de manera alterna, luego haciendo uso de buffers circulares. 
 
 Podemos incluir detección de tonos erróneos (2 tonos columna o 2 tonos ﬁla) para encender el LED como error y mejorar el algoritmo de decodiﬁcación del numero
