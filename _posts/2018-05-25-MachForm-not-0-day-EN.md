@@ -2,7 +2,7 @@
 title: "Ceci n'est pas un 0-Day (MachForm)"
 excerpt: "Full disclosure of Not-Zero-Day vulnerabilities in MachForm"
 header:
-  teaser: "/assets/images/machform-not-0-day/teaser.png"
+  teaser: "/assets/images/MachForm-not-0-day/teaser.png"
 tags:
   - EN
   - Machform
@@ -10,6 +10,9 @@ tags:
   - Path Traversal
   - RCE
 hidden: false
+toc: true
+toc_label: "Index"
+toc_icon: "cog"
 gallery1:
           - url: /assets/images/Perl-from-EXE/referenced.png
             image_path: /assets/images/Perl-from-EXE/referenced.png
@@ -34,8 +37,8 @@ The application is widely deployed and with some google dorks it's possible to f
 
 Affected versions go from version **3.0** until the fixed version **4.2.3** 
 
-## SQL injection 
-(Provisional CVE-2018-6410)
+## SQL injection
+[CVE-2018-6410](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6410)
 
 The software is subject to SQL injections in the **'download.php'** file. This SQLi can be found on the parameter **'q'** which a *base64* encoded value for the following parameters:
 ```php
@@ -65,8 +68,8 @@ el= (SELECT 1 FROM(SELECT COUNT(*),CONCAT(0x2020,(SELECT MID((user_email),1,50) 
   <figcaption style="text-align: center">SQLi Server Response</figcaption>
 </figure>
 
-## Path traversal 
-(Provisional CVE-2018-6409)
+## Path traversal
+[CVE-2018-6409](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6409)
 
 **'download.php'** is used to serve stored files from the forms answers. Modifying the name of the file to serve on the corresponding **ap_form** table leads to a path traversal vulnerability.
 
@@ -88,7 +91,7 @@ Note that hash is the MD5 of the corresponding filename:
 `md5("../../../../../../../../../../../../../../../../etc/passwd") = 402ba0230d6f44a2de590ac11107a458`
 
 ## Bypass file upload filter 
-(Provisional CVE-2018-6411)
+[CVE-2018-6411](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6411)
 
 When the form is set to filter a blacklist, it automatically adds dangerous extensions to the filters. 
 If the filter is set to a whitelist, the dangerous extensions can be bypassed.
