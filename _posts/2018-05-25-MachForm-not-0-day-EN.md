@@ -9,7 +9,7 @@ tags:
   - SQL Injection
   - Path Traversal
   - RCE
-hidden: true
+hidden: false
 gallery1:
           - url: /assets/images/Perl-from-EXE/referenced.png
             image_path: /assets/images/Perl-from-EXE/referenced.png

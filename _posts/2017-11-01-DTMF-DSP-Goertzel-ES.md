@@ -10,6 +10,9 @@ tags:
   - Goertzel
   - DSP
 usemathjax: true
+toc: true
+toc_label: "Index"
+toc_icon: "cog"
 gallery1:
           - url: /assets/images/DTMF-DSP/nada.jpg
             image_path: /assets/images/DTMF-DSP/nada.jpg
@@ -27,6 +30,15 @@ gallery1:
             image_path: /assets/images/DTMF-DSP/9.jpg
             alt: "Salida correspondiente al ’9’"
             title: "Salida correspondiente al ’9’"
+gallery2:
+          - url: /assets/images/DTMF-DSP/chip.jpg
+            image_path: /assets/images/DTMF-DSP/chip.jpg
+            alt: "ADSP-2181"
+            title: "ADSP-2181"
+          - url: /assets/images/DTMF-DSP/kit.jpg
+            image_path: /assets/images/DTMF-DSP/kit.jpg
+            alt: "EZKIT-Lite"
+            title: "EZKIT-Lite"
 ---
 
 El cálculo de todos los valor de la DFT no es necesario a la hora de implementar un detector DTMF, entonces hacer la FFT puede suponer un peso computacional innecesario y mejorable. Por esa razón se hace uso del Algoritmo de Goertzel que permite calcular la DFT únicamente en las frecuencias deseadas para comprobar la presencia del par de tonos que corresponden al número marcado.
@@ -34,6 +46,8 @@ El cálculo de todos los valor de la DFT no es necesario a la hora de implementa
 En este trabajo se pretende implementar el citado Algoritmo de Goertzel que permite calcular un valor de X[k] mediante ﬁltrado.
 
 El es de obtener un detector funcional de marcación DTMF con una salida visual por el osciloscopio. La implementación se hace sobre la placa de desarrollo *EZKIT-Lite* de *Analog Devices* basada en el **ADSP-2181** del mismo fabricante.
+
+{% include gallery id="gallery2" %}
 
 El algoritmo consiste en 2 partes: Una recursiva mientras se reciben datos, y la segunda que se hace cada N muestras para calcular el resultado de la DFT. 
 
