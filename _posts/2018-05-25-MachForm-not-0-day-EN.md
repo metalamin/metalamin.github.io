@@ -23,6 +23,7 @@ gallery1:
             alt: "Strings"
             title: "Strings"
 ---
+**Important update: The product is still vulnerable. The vulnerable code may have been reincorporated in a later version ... **
 
 Years ago, I discovered some vulnerabilities in [MachForm from Appnitro](https://www.machform.com/). These were reported to the vendor who acknowledged it, issued a fix and even published the [notice for the users to update ASAP.](https://www.machform.com/blog-machform-423-security-release/)
 
