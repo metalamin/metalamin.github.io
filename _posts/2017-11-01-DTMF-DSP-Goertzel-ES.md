@@ -41,6 +41,8 @@ gallery2:
             title: "EZKIT-Lite"
 ---
 
+Código fuente y artículo original en [https://github.com/metalamin/DSP-Goertzel](https://github.com/metalamin/DSP-Goertzel)
+
 El cálculo de todos los valor de la DFT no es necesario a la hora de implementar un detector DTMF, entonces hacer la FFT puede suponer un peso computacional innecesario y mejorable. Por esa razón se hace uso del Algoritmo de Goertzel que permite calcular la DFT únicamente en las frecuencias deseadas para comprobar la presencia del par de tonos que corresponden al número marcado.
 
 En este trabajo se pretende implementar el citado Algoritmo de Goertzel que permite calcular un valor de X[k] mediante ﬁltrado.
