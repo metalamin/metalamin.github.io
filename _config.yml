@@ -61,7 +61,7 @@ analytics:
   provider: "google-gtag"
   google:
     tracking_id: "UA-76198646-2"
-google_verify: OdWSISFYeXwWMKyR4XGqSQEBjh71eR9sFpoqqRCcV58
+google_site_verification: "OdWSISFYeXwWMKyR4XGqSQEBjh71eR9sFpoqqRCcV58"
 
 # HTML Compression
 # - http://jch.penibelst.de/
