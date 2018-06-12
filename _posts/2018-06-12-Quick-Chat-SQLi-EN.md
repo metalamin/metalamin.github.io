@@ -8,7 +8,7 @@ tags:
   - WordPress
   - Plugin
   - SQL
-gallery1:
+gallerydork:
           - url: /assets/images/Quick-Chat-SQLi/Fofa.png
             image_path: /assets/images/Quick-Chat-SQLi/Fofa.png
             alt: "FOFA Dork"
@@ -17,7 +17,27 @@ gallery1:
             image_path: /assets/images/Quick-Chat-SQLi/Shodan.png
             alt: "Shodan Dork"
             title: "Shodan Dork"
+gallerypoc1:
+          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_req.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_req.png
+            alt: "SQLi True statment request"
+            title: "SQLi True statment request"
+          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
+            alt: "SQLi True statment response"
+            title: "SQLi True statment response"
+          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
+            alt: "SQLi True statment response"
+            title: "SQLi True statment response"
+          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
+            alt: "SQLi True statment response"
+            title: "SQLi True statment response"
 hidden: true
+toc: true
+toc_label: "Index"
+toc_icon: "cog"
 ---
 
 ## Summary
@@ -38,14 +58,11 @@ The plugin is subject to SQL injections throught the ajax call **quick-chat-ajax
   <figcaption style="text-align: center">Vulnerable code</figcaption>
 </figure>
 
+The function *like_escape()* is not meant to act as security measure against SQL injections. In fact it only escapes special characters related to the LIKE statement.(**%** and **_**). Even the newer *wpdb::esc_like* is not safe as stated on the oficial documentation:  ["The output is not SQL safe."](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
 
+The vulnerable parameter is **username_check** as we can apreciate on the following POC where the SQL injection is *Blind Boolean Based*.
 
- This SQLi can be found on the **to_delete_ids** parameter when using the action **quick-chat-ajax-username-check**.
-
-Proof of concept to get the current database name:
-```sql
-action=quick-chat-ajax-delete&to_delete_ids[]=666,(select 1 from(select count(*),concat((select (select concat(0x7e,0x27,Hex(cast(database() as char)),0x27,0x7e)) from information_schema.tables limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)
-```
+{% include gallery id="gallerypoc1" %}
 
 
 
@@ -65,7 +82,7 @@ action=quick-chat-ajax-delete&to_delete_ids[]=666,(select 1 from(select count(*)
 ## Dorks
 The pluging sets the cookie "quick_chat_alias" so it can be easely tracked searching for it on [shodan.io](https://www.shodan.io/) or [fofa.so](https://fofa.so)
 
-
+{% include gallery id="gallerydork" %}
 
 
 
