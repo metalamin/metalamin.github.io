@@ -55,23 +55,11 @@ Let's take a look at this vulnerability found on the plugin ['Quick Chat'](https
 
 The plugin is subject to SQL injections throught the ajax call **quick-chat-ajax-username-check**. As we may apreciate in the code:
 <figure class="align-center">
-  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Quick-Chat-SQLi/like_escape.png" alt="">
+  <img class="align-center" style="width: 75%" src="{{ site.url }}{{ site.baseurl }}/assets/images/Quick-Chat-SQLi/like_escape.png" alt="">
   <figcaption style="text-align: center">Vulnerable code</figcaption>
 </figure>
 
-```php
-    if($username_exists == 0){
-        $sql = 'SELECT COUNT(*) FROM '.$quick_chat_users_table_name.' WHERE alias like "%' . like_escape($_POST['username_check']) . '";';
-
-        $users = $wpdb->get_var($sql);
-
-        if($users != 0){
-            $username_exists = 1;
-        }
-    }
-```
-
-The function *like_escape()* is not meant to act as security measure against SQL injections. In fact it only escapes special characters related to the LIKE statement.(**%** and **_**). Even the newer *wpdb::esc_like* is not safe as stated on the oficial documentation:  ["The output is not SQL safe."](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
+The function *like_escape()* is not meant to act as security measure against SQL injections. In fact it only escapes special characters related to the LIKE statement.( **%** and **_** ). Even the newer **wpdb::esc_like** is not safe as stated on the oficial documentation:  ["The output is not SQL safe."](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
 
 The vulnerable parameter is **username_check** as we can apreciate on the following POC where the SQL injection is *Blind Boolean Based*.
 
@@ -97,7 +85,7 @@ action=quick-chat-ajax-delete&to_delete_ids[]=666,(select 1 from(select count(*)
 The pluging sets the cookie "quick_chat_alias" so it can be easely tracked searching for it on [shodan.io](https://www.shodan.io/) or [fofa.so](https://fofa.so)
 
 <figure class="align-center">
-  <img class="align-center" style="width: 70%" src="{{ site.url }}{{ site.baseurl }}/assets/images/Quick-Chat-SQLi/Fofa.png" alt="">
+  <img class="align-center" style="width: 75%" src="{{ site.url }}{{ site.baseurl }}/assets/images/Quick-Chat-SQLi/Fofa.png" alt="">
   <figcaption style="text-align: center">FOFA Dork</figcaption>
 </figure>
 
