@@ -27,14 +27,14 @@ gallerypoc1:
             alt: "SQLi True statment response"
             title: "SQLi True statment response"
 gallerypoc2:
-          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_rep.png
-            image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
-            alt: "SQLi True statment response"
-            title: "SQLi True statment response"
-          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
-            image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
-            alt: "SQLi True statment response"
-            title: "SQLi True statment response"
+          - url: /assets/images/Quick-Chat-SQLi/SQL1_false_rep.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL1_false_rsp.png
+            alt: "SQLi False statment response"
+            title: "SQLi False statment response"
+          - url: /assets/images/Quick-Chat-SQLi/SQL1_false_rsp.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL1_false_rsp.png
+            alt: "SQLi False statment response"
+            title: "SQLi False statment response"
 hidden: true
 toc: true
 toc_label: "Index"
@@ -84,7 +84,10 @@ action=quick-chat-ajax-delete&to_delete_ids[]=666,(select 1 from(select count(*)
 ## Dorks
 The pluging sets the cookie "quick_chat_alias" so it can be easely tracked searching for it on [shodan.io](https://www.shodan.io/) or [fofa.so](https://fofa.so)
 
-{% include gallery id="gallerydork" %}
+<figure class="align-center">
+  <img class="align-center" style="width: auto" src="{{ site.url }}{{ site.baseurl }}/assets/images/Quick-Chat-SQLi/Fofa.png" alt="">
+  <figcaption style="text-align: center">FOFA Dork</figcaption>
+</figure>
 
 
 
