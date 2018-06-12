@@ -13,15 +13,6 @@ hidden: false
 toc: true
 toc_label: "Index"
 toc_icon: "cog"
-gallery1:
-          - url: /assets/images/Perl-from-EXE/referenced.png
-            image_path: /assets/images/Perl-from-EXE/referenced.png
-            alt: "Referenced strings"
-            title: "Referenced strings"
-          - url: /assets/images/Perl-from-EXE/strings_2.png
-            image_path: /assets/images/Perl-from-EXE/strings_2.png
-            alt: "Strings"
-            title: "Strings"
 ---
 
 Years ago, I discovered some vulnerabilities in [MachForm from Appnitro](https://www.machform.com/). These were reported to the vendor who acknowledged it, issued a fix and even published the [notice for the users to update ASAP.](https://www.machform.com/blog-machform-423-security-release/)
