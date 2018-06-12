@@ -26,7 +26,8 @@ gallerypoc1:
             image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
             alt: "SQLi True statment response"
             title: "SQLi True statment response"
-          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
+gallerypoc2:
+          - url: /assets/images/Quick-Chat-SQLi/SQL1_true_rep.png
             image_path: /assets/images/Quick-Chat-SQLi/SQL1_true_rsp.png
             alt: "SQLi True statment response"
             title: "SQLi True statment response"
@@ -63,6 +64,7 @@ The function *like_escape()* is not meant to act as security measure against SQL
 The vulnerable parameter is **username_check** as we can apreciate on the following POC where the SQL injection is *Blind Boolean Based*.
 
 {% include gallery id="gallerypoc1" %}
+{% include gallery id="gallerypoc2" %}
 
 
 
