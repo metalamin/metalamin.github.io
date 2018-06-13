@@ -2,7 +2,7 @@
 title: "Quick Chat(WordPress) - Multiple SQL Injections"
 excerpt: "Full details of the Multiple SQL injections in 'Quick Chat' plugin for WordPress"
 header:
-  teaser: "/assets/images/Perl-from-EXE/teaser.png"
+  teaser: "/assets/images/Quick-Chat-SQLi/like_escape.png"
 tags:
   - EN
   - WordPress
