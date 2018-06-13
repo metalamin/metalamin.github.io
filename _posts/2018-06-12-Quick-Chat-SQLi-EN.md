@@ -53,9 +53,9 @@ toc_icon: "cog"
 ---
 
 ## Summary
-This story starts with a headhunter offering me a job for a major company. No need to say I always screen the employer as I expect they would do to me. If we add the fact that I was a little bored, I ended up finding a 0-day in a wordpress plugin used in one of their servers.
+This story starts with a head-hunter offering me a job for a major company. No need to say I always screen the employer as I expect they would do to me. If we add the fact that I was a little bored, I ended up finding a 0-day in a WordPress plugin used in one of their servers.
 
-Even if this is not a security compamy they take it very seriously. Kudos for their security team as they managed it blaseling fast.
+Even not a being security company they take it very seriously. Kudos for their security team as they managed it blazingly fast.
 
 Let's take a look at this vulnerability found on the plugin ['Quick Chat'](https://wordpress.org/plugins/quick-chat/) for WordPress.
 
@@ -64,26 +64,26 @@ Let's take a look at this vulnerability found on the plugin ['Quick Chat'](https
 
 **Status: still not patched**
 
-The plugin is subject to SQL injections throught the ajax call **quick-chat-ajax-username-check**. As we may apreciate in the code:
+The plugin is subject to SQL injections through the ajax call **quick-chat-ajax-username-check**. As we may appreciate in this vulnerable code:
 <figure class="align-center">
   <img class="align-center" style="width: 75%" src="{{ site.url }}{{ site.baseurl }}/assets/images/Quick-Chat-SQLi/like_escape.png" alt="">
   <figcaption style="text-align: center">Vulnerable code</figcaption>
 </figure>
 
-The function *like_escape()* is not meant to act as security measure against SQL injections. In fact it only escapes special characters related to the LIKE statement.( **%** and **_** ). Even the newer **wpdb::esc_like** is not safe as stated on the oficial documentation:  ["The output is not SQL safe."](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
+The function *like_escape()* is not meant to act as security measure against SQL injections. In fact, it only escapes special characters related to the LIKE statement.( **%** and **_** ). Even the newer **wpdb::esc_like** is not safe as stated on the official documentation:  ["The output is not SQL safe."](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
 
-The vulnerable parameter is **username_check** as we can apreciate on the following POC where the SQL injection is *Blind Boolean Based*.
+The vulnerable parameter is **username_check** as we can appreciate on the following POC where the SQL injection is *Blind Boolean Based*.
 
 {% include gallery id="gallerypoc1" %}
 {% include gallery id="gallerypoc2" %}
 
-*Note: if "no_participation" is set to 1, login is requiered to preceed with the injection.* 
+*Note: if "no_participation" is set to 1, login is required to proceed with the injection.* 
 
 ## SQL Injection 2
 
 **Status: patched on version 4.0**
 
-The plugin was subject to SQL injections throught the ajax call. This SQLi can be found on the **to_delete_ids** parameter when using the action **quick-chat-ajax-delete**.
+The plugin was subject to SQL injections through the ajax call. This SQLi can be found on the **to_delete_ids** parameter when using the action **quick-chat-ajax-delete**.
 
 Proof of concept to get the current database name using an error based technique:
 ```sql
@@ -93,7 +93,7 @@ action=quick-chat-ajax-delete&to_delete_ids[]=666,(select 1 from(select count(*)
 {% include gallery id="gallerypoc3" %}
 
 ## Dorks
-The pluging sets the cookie "quick_chat_alias" so it can be easely tracked searching for it on [shodan.io](https://www.shodan.io/) or [fofa.so](https://fofa.so)
+The plugin sets the cookie "quick_chat_alias" so it can be easily tracked searching for it on [shodan.io](https://www.shodan.io/) or [fofa.so](https://fofa.so)
 
 <figure class="align-center">
   <img class="align-center" style="width: 75%" src="{{ site.url }}{{ site.baseurl }}/assets/images/Quick-Chat-SQLi/Fofa.png" alt="">
