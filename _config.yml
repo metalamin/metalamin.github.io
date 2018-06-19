@@ -33,6 +33,7 @@ author:
   email  : # optional
   uri    : "http://metalamin.github.io"
   home   :
+  telegram : "metalamin"
   github : "metalamin"
   twitter: *twitter
 
