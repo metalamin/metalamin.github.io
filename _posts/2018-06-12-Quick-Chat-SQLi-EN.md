@@ -60,7 +60,7 @@ Even not a being security company they take it very seriously. Kudos for their s
 Let's take a look at this vulnerability found on the plugin ['Quick Chat'](https://wordpress.org/plugins/quick-chat/) for WordPress.
 
 
-## SQL Injection 1
+## SQL Injection 1 (CVE-2018-12535)
 
 **Status: still not patched**
 
@@ -92,7 +92,7 @@ change to:
  $sql = 'SELECT COUNT(*) FROM '.$quick_chat_users_table_name.' WHERE alias like "%' . esc_sql(like_escape($_POST['username_check'])) . '";';
 ```
 
-## SQL Injection 2
+## SQL Injection 2 (CVE-2018-12534)
 
 **Status: patched on version 4.0**
 
