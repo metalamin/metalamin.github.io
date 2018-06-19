@@ -47,7 +47,7 @@ El cálculo de todos los valor de la DFT no es necesario a la hora de implementa
 
 En este trabajo se pretende implementar el citado Algoritmo de Goertzel que permite calcular un valor de X[k] mediante ﬁltrado.
 
-El es de obtener un detector funcional de marcación DTMF con una salida visual por el osciloscopio. La implementación se hace sobre la placa de desarrollo *EZKIT-Lite* de *Analog Devices* basada en el **ADSP-2181** del mismo fabricante.
+El objetivo es de obtener un detector funcional de marcación DTMF con una salida visual por el osciloscopio. La implementación se hace sobre la placa de desarrollo *EZKIT-Lite* de *Analog Devices* basada en el **ADSP-2181** del mismo fabricante.
 
 {% include gallery id="gallery2" %}
 

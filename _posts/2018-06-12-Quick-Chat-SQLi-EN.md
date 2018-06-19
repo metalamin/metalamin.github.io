@@ -2,7 +2,7 @@
 title: "Quick Chat(WordPress) - Multiple SQL Injections"
 excerpt: "Full details of the Multiple SQL injections in 'Quick Chat' plugin for WordPress"
 header:
-  teaser: "/assets/images/Quick-Chat-SQLi/like_escape.png"
+  teaser: "/assets/images/Quick-Chat-SQLi/teaser.png"
 tags:
   - EN
   - WordPress
@@ -46,7 +46,7 @@ gallerypoc3:
             title: "SQLi Error based response"
             
             
-hidden: true
+hidden: false
 toc: true
 toc_label: "Index"
 toc_icon: "cog"
@@ -70,7 +70,7 @@ The plugin is subject to SQL injections through the ajax call **quick-chat-ajax-
   <figcaption style="text-align: center">Vulnerable code</figcaption>
 </figure>
 
-The function *like_escape()* is not meant to act as security measure against SQL injections. In fact, it only escapes special characters related to the LIKE statement.( **%** and **_** ). Even the newer **wpdb::esc_like** is not safe as stated on the official documentation:  ["The output is not SQL safe."](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
+The function **like_escape()** is not meant to act as security measure against SQL injections. In fact, it only escapes special characters related to the LIKE statement. Even the newer **wpdb::esc_like** is not safe as stated on the official documentation:  ["The output is not SQL safe."](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
 
 The vulnerable parameter is **username_check** as we can appreciate on the following POC where the SQL injection is *Blind Boolean Based*.
 
@@ -78,6 +78,19 @@ The vulnerable parameter is **username_check** as we can appreciate on the follo
 {% include gallery id="gallerypoc2" %}
 
 *Note: if "no_participation" is set to 1, login is required to proceed with the injection.* 
+
+# Mitigation
+
+Even if the best way to mitigate SQL injection is to use **wpdb::prepare()**, in this case **esc_sql()** may be used as it escapes values to be included in strings in the query.
+
+On line 399:
+```php
+ $sql = 'SELECT COUNT(*) FROM '.$quick_chat_users_table_name.' WHERE alias like "%' . like_escape($_POST['username_check']) . '";';
+```
+change to:
+```php
+ $sql = 'SELECT COUNT(*) FROM '.$quick_chat_users_table_name.' WHERE alias like "%' . esc_sql(like_escape($_POST['username_check'])) . '";';
+```
 
 ## SQL Injection 2
 
