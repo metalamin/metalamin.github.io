@@ -30,14 +30,14 @@ author:
   name   : "Amine Taouirsa"
   avatar : "/assets/images/Bio.jpg"
   bio: "How about ... 'xchg eax, eax'!!"
-  location: "Madrid, Spain"
+  location: "Spain"
   email  : # optional
   uri    : "http://metalamin.github.io"
   home   :
-  telegram : "metalamin"
   github : "metalamin"
   twitter: *twitter
-
+  linkedin: "amine-taouirsa"
+  
 defaults:
   # _posts
   - scope:
